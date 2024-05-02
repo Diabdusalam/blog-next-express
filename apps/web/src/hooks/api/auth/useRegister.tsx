@@ -14,7 +14,7 @@ const useRegister = () => {
     try {
       await axiosInstance.post('/auth/register', payload);
 
-      router.push(`/login`);
+      router.push(`/home`);
     } catch (error) {
       console.log(error);
     }
