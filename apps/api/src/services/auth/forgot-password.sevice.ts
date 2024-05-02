@@ -28,6 +28,7 @@ export const forgotPasswordService = async (body: Pick<User, `email`>) => {
       subject: 'Link Reset Password',
       html: `<a href="${link}" target="_blank">Reset Password Here</a>`,
     });
+    return { message: 'email already reset password' };
   } catch (error) {
     throw error;
   }

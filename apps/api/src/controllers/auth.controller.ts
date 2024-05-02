@@ -27,7 +27,7 @@ export class AuthController {
     next: NextFunction,
   ) {
     try {
-      const result = await forgotPasswordService(req.body.email);
+      const result = await forgotPasswordService(req.body);
       res.status(200).send(result);
     } catch (error) {
       next(error);
