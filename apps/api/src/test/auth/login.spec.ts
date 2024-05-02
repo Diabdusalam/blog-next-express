@@ -51,12 +51,13 @@
 // });
 
 import App from '@/app';
-import request from 'supertest';
+import { comparePassword } from '@/lib/bcrypt';
 import { prismaMock } from '@/test/prisma';
+import request from 'supertest';
 
 const requestBody = {
-  email: 'mock@mail.com',
-  password: 'mockpassword',
+  email: 'mock email',
+  password: 'mock password',
 };
 
 jest.mock('@/lib/bcrypt', () => ({
@@ -66,12 +67,12 @@ jest.mock('@/lib/bcrypt', () => ({
 describe('POST /auth/login', () => {
   const { app } = new App();
 
-  it('Should login successfully', async () => {
+  it('should login successfully', async () => {
     prismaMock.user.findFirst.mockResolvedValueOnce({
       id: 1,
-      fullName: 'mock fullName',
-      email: 'mock@mail.com',
-      password: 'mockpassword',
+      fullName: 'mock fullname',
+      email: 'mock password',
+      password: 'mock password',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -80,9 +81,48 @@ describe('POST /auth/login', () => {
       .post('/api/auth/login')
       .send(requestBody);
 
+    console.log(response.text);
+
     expect(response.status).toBe(200);
-    expect(response.body.message).toBe('login succesful');
+    expect(response.body.message).toBe('login success');
     expect(response.body.data).toBeDefined();
     expect(response.body.token).toBeDefined();
+  });
+
+  it('should return errror if email not found', async () => {
+    prismaMock.user.findFirst.mockResolvedValueOnce(null);
+
+    const response = await request(app)
+      .post('/api/auth/login')
+      .send(requestBody);
+
+    // console.log(response);
+
+    expect(response.status).toBe(500);
+    expect(response.text).toBe('Invalid email address');
+  });
+
+  it('should return errror if password not match', async () => {
+    prismaMock.user.findFirst.mockResolvedValueOnce({
+      id: 1,
+      fullName: 'mock fullname',
+      email: 'mock password',
+      password: 'mock password',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+
+    (comparePassword as jest.Mock).mockResolvedValueOnce(false);
+
+    const response = await request(app)
+      .post('/api/auth/login')
+      .send(requestBody);
+
+    // console.log(response);
+
+    expect(response.status).toBe(500);
+    expect(response.text).toBe('incorect password');
+
+    //   //     expect(response.text).toBe('invalid email adress');
   });
 });

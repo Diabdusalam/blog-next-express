@@ -26,7 +26,7 @@ describe('POST /auth/register', () => {
       .post('/api/auth/register')
       .send(requestBody);
 
-    console.log(response);
+    // console.log(response);
     expect(response.status).toBe(200);
   });
 
