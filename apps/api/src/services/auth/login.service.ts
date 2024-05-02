@@ -2,7 +2,7 @@ import { comparePassword, hashedPassword } from '@/lib/bcrypt';
 import prisma from '@/prisma';
 import { User } from '@prisma/client';
 import { sign } from 'jsonwebtoken';
-import { appConfig } from 'utils/config';
+import { jwtSecretKey } from '../../config';
 
 export const loginService = async (body: Pick<User, `email` | `password`>) => {
   try {
@@ -23,7 +23,7 @@ export const loginService = async (body: Pick<User, `email` | `password`>) => {
       throw new Error('incorect password');
     }
 
-    const token = sign({ id: existingUser.id }, appConfig.jwtSecretKey, {
+    const token = sign({ id: existingUser.id }, jwtSecretKey, {
       expiresIn: '2h',
     });
 
