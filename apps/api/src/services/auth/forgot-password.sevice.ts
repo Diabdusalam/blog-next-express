@@ -17,7 +17,7 @@ export const forgotPasswordService = async (body: Pick<User, `email`>) => {
     }
 
     const token = sign({ id: existingUser.id }, jwtSecretKey, {
-      expiresIn: '38s',
+      expiresIn: '1h',
     });
 
     const link = BASE_URL_NEXT + `/reset-password?token=${token}`;

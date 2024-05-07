@@ -12,6 +12,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import useLogin from '@/hooks/api/auth/useLogin';
 import { useFormik } from 'formik';
+import { useRouter } from 'next/navigation';
 
 const Login = () => {
   const { login } = useLogin();
@@ -22,7 +23,7 @@ const Login = () => {
       login(values);
     },
   });
-
+  const router = useRouter();
   return (
     <div className="flex justify-center w-screen h-screen">
       <div className="flex justify-center items-center">
@@ -55,6 +56,12 @@ const Login = () => {
                   />
                 </div>
               </div>
+              <p
+                className="cursor-pointer text-end text-xs"
+                onClick={() => router.push('/forgot-password')}
+              >
+                Forgot password?
+              </p>
             </CardContent>
             <CardFooter className="flex justify-between">
               <Button className="w-full" type="submit">

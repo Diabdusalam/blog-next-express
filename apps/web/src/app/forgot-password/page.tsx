@@ -1,6 +1,5 @@
 'use client';
 
-import { Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -11,10 +10,10 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import useLogin from '@/hooks/api/auth/useLogin';
-import { useFormik } from 'formik';
-import { validationSchema } from './validationSchema';
 import useForgotPassword from '@/hooks/api/auth/useForgotPassword';
+import { useFormik } from 'formik';
+import { Loader2 } from 'lucide-react';
+import { validationSchema } from './validationSchema';
 
 const ForgotPassword = () => {
   const { forgotPassword, isLoading } = useForgotPassword();

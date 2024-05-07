@@ -16,7 +16,7 @@ const Register = () => {
     },
   });
   return (
-    <div>
+    <>
       <main className="container mx-auto my-10 px-4">
         <div className="flex justify-center">
           <Card className="w-[450px]">
@@ -82,7 +82,7 @@ const Register = () => {
           </Card>
         </div>
       </main>
-    </div>
+    </>
   );
 };
 
