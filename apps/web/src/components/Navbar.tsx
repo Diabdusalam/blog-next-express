@@ -22,14 +22,14 @@ const Navbar = () => {
             <div className="flex items-center gap-8">
               <h3 onClick={() => Router.push('/')}>Home</h3>
               <h3 onClick={() => Router.push('/write')}>Write</h3>
-              <h3 onClick={() => Router.push('/profike')}>Profile</h3>
+              <h3 onClick={() => Router.push('/profile')}>Profile</h3>
               <h3 onClick={logout}>Logout</h3>
             </div>
           ) : (
             <div className="flex items-center gap-8">
-              <h3>Home</h3>
-              <h3>Login</h3>
-              <h3>Register</h3>
+              <h3 onClick={() => Router.push('/')}>Home</h3>
+              <h3 onClick={() => Router.push('/login')}>Login</h3>
+              <h3 onClick={() => Router.push('/register')}>Register</h3>
             </div>
           )}
         </div>
