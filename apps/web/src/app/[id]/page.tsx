@@ -9,6 +9,7 @@ import Image from 'next/image';
 import Markdown from '../../components/ui/Markdown';
 import SkeletonBlogDetail from './components/SkeletonBlogDetail';
 import { appConfig } from '@/utils/config';
+import AuthGuard from '@/hoc/AuthGuard';
 
 // const BlogDetail = ({ params }: { params: { id: string } }) => {
 //   const { blog, isLoading } = useGetBlog(Number(params.id));
@@ -112,4 +113,4 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
   );
 };
 
-export default BlogDetail;
+export default AuthGuard(BlogDetail);
