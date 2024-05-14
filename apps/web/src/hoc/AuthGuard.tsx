@@ -9,6 +9,7 @@ export default function AuthGuard(Component: any) {
     const [isLoading, setIsLoading] = useState(true);
 
     const { id } = useAppSelector((state) => state.user);
+    console.log(id);
 
     useEffect(() => {
       setTimeout(() => {

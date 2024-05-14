@@ -21,7 +21,14 @@ export class BlogRouter {
       uploader('img', '/images').array('thumbnail', 1),
       this.blogController.createBlogController,
     );
+    this.router.get('/', this.blogController.getssBlogController);
     this.router.get('/:id', this.blogController.getsBlogController);
+    this.router.patch(
+      '/:id',
+      verifyToken,
+      uploader('IMG', '/images').array('thumbnail', 1),
+      this.blogController.updateBlogController,
+    );
   }
 
   getRouter(): Router {
